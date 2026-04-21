@@ -1,0 +1,6 @@
+.cursor/*
+.specify/*
+qdrant_data/
+memory-mcp-server/.venv/
+memory-mcp-server/__pycache__/
+.env

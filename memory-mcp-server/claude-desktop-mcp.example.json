@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "memorIA-windows": {
+      "command": "D:/path/to/memorIA/memory-mcp-server/.venv/Scripts/python.exe",
+      "args": [
+        "D:/path/to/memorIA/memory-mcp-server/server.py"
+      ],
+      "env": {
+        "QDRANT_URL": "http://localhost:6333",
+        "MCP_SERVER_NAME": "memorIA"
+      }
+    },
+    "memorIA-macos": {
+      "command": "/Users/your-user/path/to/memorIA/memory-mcp-server/.venv/bin/python",
+      "args": [
+        "/Users/your-user/path/to/memorIA/memory-mcp-server/server.py"
+      ],
+      "env": {
+        "QDRANT_URL": "http://localhost:6333",
+        "MCP_SERVER_NAME": "memorIA"
+      }
+    }
+  }
+}

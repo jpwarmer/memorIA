@@ -1,0 +1,4 @@
+mcp
+qdrant-client
+fastembed
+python-dotenv
