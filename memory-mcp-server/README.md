@@ -51,6 +51,8 @@ Variables:
 - `QDRANT_API_KEY` (optional)
 - `MCP_SERVER_NAME` (default `memorIA`)
 - `EMBEDDING_MODEL` (default multilingual ES/EN model)
+- `EMBED_MAX_TOKENS` (default `128`)
+- `EMBED_CHUNK_OVERLAP` (default `16`)
 
 ## 4) Run the MCP server
 
@@ -66,10 +68,12 @@ Variables:
 ./.venv/bin/python server.py
 ```
 
-Exposes 3 tools:
-- `memory_search(query, project_id, scope, limit, tags, session_id)`
-- `memory_save(text, project_id, scope, tags, session_id, source, metadata)`
-- `memory_list(project_id, scope, limit, cursor, tags, session_id)`
+Exposes tools:
+- `memory_search(..., min_score=None)`
+- `memory_save(...)`
+- `memory_list(..., include_text=False)`
+- `memory_update` / `memory_delete` / `memory_supersede`
+- `memory_stats` / `memory_related` / `memory_reindex` / `memory_dedupe`
 
 Supported scopes:
 - `project`
