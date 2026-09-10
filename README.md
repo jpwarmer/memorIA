@@ -66,6 +66,8 @@ Set these in `memory-mcp-server/.env`:
 - `QDRANT_API_KEY` (optional)
 - `MCP_SERVER_NAME` (default: `memorIA`)
 - `EMBEDDING_MODEL` (default: multilingual model)
+- `EMBED_MAX_TOKENS` (default: `128` — MiniLM trained window; do not inherit tokenizer.json)
+- `EMBED_CHUNK_OVERLAP` (default: `16`)
 
 ## MCP Client Configuration
 
@@ -81,14 +83,22 @@ client may pick a different interpreter and fail with
 
 ## Available Tools (Actual Contract)
 
-- `memory_search(query, project_id="default", scope="project", limit=5, tags=None, session_id=None)`
-- `memory_save(text, project_id="default", scope="project", tags=None, session_id=None, source="agent", metadata=None)`
-- `memory_list(project_id="default", scope="project", limit=20, cursor=None, tags=None, session_id=None)`
+- `memory_search(..., min_score=None)`
+- `memory_save(...)`
+- `memory_list(..., include_text=False, include_superseded=False)`
+- `memory_update(memory_id, text=None, tags=None, metadata=None)`
+- `memory_delete(memory_id)`
+- `memory_supersede(memory_id, text, ...)`
+- `memory_stats(project_id="default", scope=None)`
+- `memory_related(memory_id, limit=5, min_score=None)`
+- `memory_reindex(scope=None, dry_run=True)`
+- `memory_dedupe(project_id="default", scope="project", threshold=0.95)`
 
 Notes:
 
-- `memory_list` returns `next_cursor` for pagination.
-- `memory_delete` is not part of this MVP.
+- Search runs over chunks and returns de-duplicated parents. Superseded memories are excluded.
+- `memory_list` returns `next_cursor`. Default omits `text`.
+- `memory_dedupe` reports clusters and never deletes.
 
 ## Recommended Smoke Test
 
